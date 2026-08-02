@@ -534,7 +534,8 @@ export default function CustomersPage() {
   const rejectedCount = customers.filter(c => c.kyc_status === 'rejected').length
 
   return (
-    <div className="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto pb-24 md:pb-6">
+    <div className="h-full overflow-y-auto w-full relative">
+      <div className="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto pb-24 md:pb-6">
       {/* Toast Notification */}
       {notification && (
         <div className={`fixed top-4 right-4 z-50 flex items-center gap-2.5 px-4 py-3 rounded-2xl shadow-2xl backdrop-blur-xl border animate-in slide-in-from-top-4 duration-300 ${
@@ -1269,6 +1270,7 @@ export default function CustomersPage() {
           </div>
         </div>
       )}
+    </div>
     </div>
   )
 }
