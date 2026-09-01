@@ -13,6 +13,7 @@ type Transaction = {
   status: 'PENDING' | 'COMPLETED' | 'DISPUTED'
   amount_detected: string | null
   created_at: string
+  full_name?: string | null
 }
 
 export default function TransactionsPage() {
@@ -329,7 +330,7 @@ export default function TransactionsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="font-semibold">{tx.whatsapp_number}</div>
+                      <div className="font-semibold">{tx.full_name || tx.whatsapp_number}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wide uppercase border ${
@@ -408,7 +409,7 @@ export default function TransactionsPage() {
             <div key={tx.id} className="bg-card/60 backdrop-blur-md border border-border/50 rounded-2xl p-5 shadow-sm flex flex-col">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <div className="font-bold text-foreground text-lg">{tx.whatsapp_number}</div>
+                  <div className="font-bold text-foreground text-lg">{tx.full_name || tx.whatsapp_number}</div>
                   <div className="text-xs font-medium text-muted-foreground mt-0.5">
                     {new Date(tx.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} at {new Date(tx.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>

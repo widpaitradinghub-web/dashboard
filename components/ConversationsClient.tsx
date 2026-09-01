@@ -12,6 +12,7 @@ interface Session {
   message_count: string
   last_message_at: string
   last_message: string
+  full_name?: string | null
 }
 
 interface Message {
@@ -577,12 +578,12 @@ export default function ConversationsClient() {
                 }`}
               >
                 <div className={`h-12 w-12 rounded-full ${avatarColor(s.session_id)} flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow`}>
-                  {initials(s.session_id)}
+                  {initials(s.full_name || s.session_id)}
                 </div>
                 <div className="flex-1 min-w-0 flex justify-between">
                   <div className="flex flex-col min-w-0 pr-2">
                     <span className={`text-[15px] truncate tracking-tight ${unread > 0 ? 'font-bold text-foreground' : 'font-semibold'}`}>
-                      {s.session_id}
+                      {s.full_name || s.session_id}
                     </span>
                     <span className={`text-[13px] truncate mt-0.5 ${unread > 0 ? 'text-foreground font-semibold' : 'text-muted-foreground'}`}>
                       {s.last_message || '—'}

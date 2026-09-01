@@ -15,7 +15,7 @@ export default async function RatesPage() {
       buyRate = result.rows[0].buy_rate_per_kes
       sellRate = result.rows[0].sell_rate_per_kes
     } else {
-      await query("INSERT INTO exchange_rates (pair, buy_rate_per_kes, sell_rate_per_kes) VALUES ('KES_NGN', 0, 0)")
+      await query("INSERT INTO exchange_rates (pair, naira_per_kes, buy_rate_per_kes, sell_rate_per_kes) VALUES ('KES_NGN', 0, 0, 0)")
     }
   } catch (error) {
     console.error("Failed to fetch rates:", error)

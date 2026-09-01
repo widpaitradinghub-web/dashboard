@@ -15,6 +15,7 @@ export async function GET() {
         COUNT(*) as message_count,
         MAX(c.created_at) as last_message_at,
         COALESCE(sh.unread_count, 0) as unread_count,
+        CASE WHEN cust.kyc_status = 'verified' THEN cust.full_name ELSE NULL END as full_name,
         (
           SELECT 
             CASE 
@@ -34,7 +35,8 @@ export async function GET() {
         ) as last_message
       FROM chat_history c
       LEFT JOIN session_handover sh ON c.session_id = sh.session_id
-      GROUP BY c.session_id, sh.unread_count
+      LEFT JOIN customers cust ON c.session_id = cust.session_id
+      GROUP BY c.session_id, sh.unread_count, cust.full_name, cust.kyc_status
       ORDER BY last_message_at DESC
     `)
     const cleanedRows = result.rows.map(row => {
